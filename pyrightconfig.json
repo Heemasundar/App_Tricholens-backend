@@ -1,0 +1,11 @@
+{
+  "venvPath": "c:/Users/Hemasundara Rao/OneDrive/Desktop/Tricholens/Tricholens2/backend_python",
+  "venv": ".venv",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportGeneralTypeIssues": "none",
+  "reportOptionalMemberAccess": "none",
+  "reportUnusedImport": "none",
+  "reportUnusedVariable": "none",
+  "typeCheckingMode": "off"
+}
