@@ -320,8 +320,9 @@ def login():
 
 @app.route("/diagnose", methods=["POST"])
 def diagnose():
-    # ABSOLUTE LOG ENTRY
-    with open(r"c:\Users\Hemasundara Rao\OneDrive\Desktop\Tricholens\Tricholens2\backend_python\diagnose_hit.log", "a") as f:
+    # RELATIVE LOG ENTRY
+    log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "diagnose_hit.log")
+    with open(log_path, "a") as f:
         f.write(f"[{datetime.now()}] Diagnose hit. Files: {list(request.files.keys())}\n")
 
     if "image" not in request.files: return jsonify({"status": "error", "message": "No image part"}), 400
@@ -329,7 +330,8 @@ def diagnose():
     if file.filename == "": return jsonify({"status": "error", "message": "No selected file"}), 400
 
     # Dynamic log for troubleshooting same-result issue
-    with open("diagnosis_debug.log", "a") as logf:
+    debug_log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "diagnosis_debug.log")
+    with open(debug_log_path, "a") as logf:
         logf.write(f"\n--- New Request: {datetime.now()} ---\n")
         logf.write(f"File: {file.filename}\n")
 
@@ -639,8 +641,8 @@ if __name__ == "__main__":
     def is_port_in_use(port: int) -> bool:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: return s.connect_ex(('localhost', port)) == 0
 
-    # Prioritize 5000 as it is standard for the Android App
-    ports_to_try = [5000, 8000, 8080, 8001]
+    # Prioritize 8118 and 5000 as requested
+    ports_to_try = [8118, 5000, 8000, 8080, 8001]
     chosen = None
     for port in ports_to_try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
